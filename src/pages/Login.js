@@ -5,6 +5,7 @@ import { useToasts } from "react-toast-notifications";
 import { Redirect } from "react-router-dom";
 
 import { login } from "actions";
+import OnlyGuest from "HOC/OnlyGuest";
 const Login = () => {
   const [redirect, setRedirect] = useState(false);
   const { register, handleSubmit } = useForm();
@@ -90,4 +91,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default OnlyGuest(Login);

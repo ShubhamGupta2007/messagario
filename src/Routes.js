@@ -8,24 +8,28 @@ import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register";
 
 import { Switch, Route } from "react-router-dom";
+import ServiceCreate from "pages/services/ServiceCreate";
+
 function Routes() {
   return (
     <Switch>
       <Route exact path="/register" component={RegisterPage} />
       <Route exact path="/login" component={LoginPage} />
-      <Route path="/services/:serviceId">
+      <Route exact path="/services/:serviceId">
         <ServiceDetailPage />
       </Route>
-      <Route path="/services">
+
+      <Route exact path="/services/new/:userid" component={ServiceCreate} />
+      <Route exact path="/services">
         <ServicesPage />
       </Route>
-      <Route path="/profile">
+      <Route excat path="/profile">
         <ProfilePage />
       </Route>
-      <Route path="/faq">
+      <Route exact path="/faq">
         <FaqPage />
       </Route>
-      <Route path="/">
+      <Route excat path="/">
         <HomePage />
       </Route>
     </Switch>

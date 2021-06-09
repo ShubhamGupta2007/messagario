@@ -5,6 +5,7 @@ import RegisterForm from "components/auth/RegisterForm";
 import { register } from "actions";
 import { useToasts } from "react-toast-notifications";
 import { Redirect } from "react-router";
+import OnlyGuest from "HOC/OnlyGuest";
 
 const Register = (props) => {
   const [redirect, setRedirect] = useState(false);
@@ -57,4 +58,4 @@ const Register = (props) => {
   );
 };
 
-export default Register;
+export default OnlyGuest(Register);
