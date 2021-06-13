@@ -1,6 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 
-const ServiceCreate = () => {
+import { createService } from "actions";
+import withAuthorization from "HOC/WithAuthorization";
+
+const ServiceCreate = ({ auth }) => {
+  const [redirect, setRedirect] = useState(false);
+  const [serviceForm, setServiceForm] = useState({
+    category: "mathematics",
+    title: "",
+    description: "",
+    image: "",
+    price: null,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setServiceForm({ ...serviceForm, [name]: value });
+  };
+
+  const handleSubmit = () => {
+    const { user } = auth;
+    createService(serviceForm, user.uid)
+      .then(() => setRedirect(true))
+      .catch(() => alert("SOME ERROR!"));
+  };
+
+  if (redirect) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <div className="create-page">
       <div className="container">
@@ -11,9 +40,12 @@ const ServiceCreate = () => {
               <label className="label">Category</label>
               <div className="control">
                 <div className="select">
-                  <select>
-                    <option value="service">Service</option>
-                    <option value="product">Product</option>
+                  <select name="category" onChange={handleChange}>
+                    <option value="mathematics">Mathematics</option>
+                    <option value="programming">Programming</option>
+                    <option value="painting">Painting</option>
+                    <option value="singing">Singing</option>
+                    <option value="english">English</option>
                   </select>
                 </div>
               </div>
@@ -21,14 +53,21 @@ const ServiceCreate = () => {
             <div className="field">
               <label className="label">Title</label>
               <div className="control">
-                <input className="input" type="text" placeholder="Text input" />
+                <input
+                  onChange={handleChange}
+                  name="title"
+                  className="input"
+                  type="text"
+                  placeholder="Text input"
+                />
               </div>
             </div>
             <div className="field">
               <label className="label">Description</label>
               <div className="control">
                 <textarea
-                  v-model="form.description"
+                  onChange={handleChange}
+                  name="description"
                   className="textarea"
                   placeholder="Textarea"
                 ></textarea>
@@ -37,18 +76,34 @@ const ServiceCreate = () => {
             <div className="field">
               <label className="label">Image Url</label>
               <div className="control">
-                <input className="input" type="text" placeholder="Text input" />
+                <input
+                  onChange={handleChange}
+                  name="image"
+                  className="input"
+                  type="text"
+                  placeholder="Text input"
+                />
               </div>
             </div>
             <div className="field">
               <label className="label">Price per Hour</label>
               <div className="control">
-                <input className="input" type="text" placeholder="Text input" />
+                <input
+                  onChange={handleChange}
+                  name="price"
+                  className="input"
+                  type="number"
+                  placeholder="Text input"
+                />
               </div>
             </div>
             <div className="field is-grouped">
               <div className="control">
-                <button type="button" className="button is-link">
+                <button
+                  onClick={handleSubmit}
+                  type="button"
+                  className="button is-link"
+                >
                   Create
                 </button>
               </div>
@@ -63,4 +118,4 @@ const ServiceCreate = () => {
   );
 };
 
-export default ServiceCreate;
+export default withAuthorization(ServiceCreate);

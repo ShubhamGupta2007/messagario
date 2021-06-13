@@ -15,11 +15,12 @@ function Routes() {
     <Switch>
       <Route exact path="/register" component={RegisterPage} />
       <Route exact path="/login" component={LoginPage} />
+      <Route exact path="/services/new" component={ServiceCreate} />
+
       <Route exact path="/services/:serviceId">
         <ServiceDetailPage />
       </Route>
 
-      <Route exact path="/services/new/:userid" component={ServiceCreate} />
       <Route exact path="/services">
         <ServicesPage />
       </Route>
