@@ -9,6 +9,7 @@ import RegisterPage from "./pages/Register";
 
 import { Switch, Route } from "react-router-dom";
 import ServiceCreate from "pages/services/ServiceCreate";
+import UserServices from "components/service/UserServices";
 
 function Routes() {
   return (
@@ -16,7 +17,7 @@ function Routes() {
       <Route exact path="/register" component={RegisterPage} />
       <Route exact path="/login" component={LoginPage} />
       <Route exact path="/services/new" component={ServiceCreate} />
-
+      <Route excat path="/services/my" component={UserServices} />
       <Route exact path="/services/:serviceId">
         <ServiceDetailPage />
       </Route>
