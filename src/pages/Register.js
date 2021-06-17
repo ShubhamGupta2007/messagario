@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import RegisterForm from "components/auth/RegisterForm";
-import { register } from "actions";
+import { register } from "actions/index.js";
 import { useToasts } from "react-toast-notifications";
 import { Redirect } from "react-router";
 import OnlyGuest from "HOC/OnlyGuest";

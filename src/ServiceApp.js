@@ -5,7 +5,7 @@ import Sidebar from "components/Sidebar";
 import Navbar from "components/Navbar";
 import Routes from "./Routes";
 import Spinner from "components/Spinner";
-import { logout } from "actions";
+import { logout } from "actions/index.js";
 
 class ServiceApp extends React.Component {
   handleLogout = () => this.props.dispatch(logout());

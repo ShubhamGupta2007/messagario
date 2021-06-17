@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 
-import { createService } from "actions";
+import { createService } from "actions/index.js";
 import withAuthorization from "HOC/WithAuthorization";
 
 const ServiceCreate = ({ auth }) => {

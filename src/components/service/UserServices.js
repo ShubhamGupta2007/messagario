@@ -3,7 +3,7 @@ import React from "react";
 import withAuthorization from "HOC/WithAuthorization";
 // import { connect } from "react-redux";
 import ServiceItem from "components/service/ServiceItem";
-import { fetchUserServices } from "actions";
+import { fetchUserServices } from "actions/index.js";
 
 class UserServices extends React.Component {
   componentDidMount() {

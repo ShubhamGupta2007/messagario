@@ -21,9 +21,10 @@ export const onAuthStateChanged = (onAuthCallback) =>
 
 export const storeAuthUser = (authUser) => (dispatch) => {
   if (authUser) {
+    // debugger;
     return api.getUserProfile(authUser.uid).then((userWithProfile) => {
       // Dispatch action to change auth state!
-
+      // debugger;
       dispatch({ user: userWithProfile, type: SET_AUTH_USER });
     });
   } else {

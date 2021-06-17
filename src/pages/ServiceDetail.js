@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchServiceById } from "actions";
+import { fetchServiceById } from "actions/index.js";
 
 import Spinner from "components/Spinner";
 import OfferModal from "components/service/OfferModal";
@@ -35,7 +35,7 @@ const ServiceDetail = (props) => {
               <h2 className="subtitle is-4">{service.description}</h2>
               <br />
               <div className="has-text-centered">
-                <OfferModal service={service} />
+                <OfferModal service={service} auth={props.auth} />
               </div>
             </div>
           </div>
@@ -45,9 +45,10 @@ const ServiceDetail = (props) => {
   );
 };
 
-const mapStateToProps = ({ selectedService }) => ({
+const mapStateToProps = ({ selectedService, auth }) => ({
   service: selectedService.item,
   isFetching: selectedService.isFetching,
+  auth: auth,
 });
 
 export default connect(mapStateToProps)(ServiceDetail);

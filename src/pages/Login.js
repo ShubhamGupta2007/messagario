@@ -4,7 +4,7 @@ import useForm from "react-hook-form";
 import { useToasts } from "react-toast-notifications";
 import { Redirect } from "react-router-dom";
 
-import { login } from "actions";
+import { login } from "actions/index.js";
 import OnlyGuest from "HOC/OnlyGuest";
 const Login = () => {
   const [redirect, setRedirect] = useState(false);

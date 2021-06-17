@@ -5,7 +5,7 @@ import { connect } from "react-redux"; // HOC
 import Hero from "components/Hero";
 import ServiceItem from "components/service/ServiceItem";
 
-import { fetchServices } from "actions";
+import { fetchServices } from "actions/index.js";
 
 class Home extends React.Component {
   state = {

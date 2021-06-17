@@ -6,7 +6,11 @@ import { ToastProvider } from "react-toast-notifications";
 import initStore from "./store";
 import { Provider } from "react-redux";
 
-import { onAuthStateChanged, storeAuthUser, resetAuthState } from "actions";
+import {
+  onAuthStateChanged,
+  storeAuthUser,
+  resetAuthState,
+} from "actions/index.js";
 
 const store = initStore();
 
