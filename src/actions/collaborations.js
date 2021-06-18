@@ -1,5 +1,9 @@
 import * as api from "api";
 import { Timestamp } from "db";
+import {
+  COLLABORATION_CREATED_FROM_OFFER,
+  FETCH_USER_MESSAGES_SUCCESS,
+} from "types";
 
 export const newCollaboration = ({
   offer: { service, time, toUser, id },
@@ -32,10 +36,22 @@ export const newMessage = ({ offer: { service, toUser }, fromUser }) => ({
   createdAt: Timestamp.fromDate(new Date()),
 });
 
-export const collaborate = (collaboration, message) => {
-  return api.createCollaboration(collaboration).then((collabId) => {
+export const collaborate = ({ collaboration, message }) => (dispatch) =>
+  api.createCollaboration(collaboration).then((collabId) => {
     message.cta = `/collaborations/${collabId}`;
     api.sendMessage(message);
+    api.markOfferAsInCollaboration(collaboration.fromOffer);
+    dispatch({
+      type: COLLABORATION_CREATED_FROM_OFFER,
+      offerId: collaboration.fromOffer,
+      offersType: "sent",
+    });
     return collabId;
   });
-};
+
+export const subscribeToMessages = (userId) => (dispatch) =>
+  api.subscribeToMessages(userId, (messages) =>
+    dispatch({ type: FETCH_USER_MESSAGES_SUCCESS, messages })
+  );
+
+export const markMessageAsRead = (message) => api.markMessageAsRead(message);

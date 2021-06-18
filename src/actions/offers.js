@@ -18,7 +18,6 @@ export const fetchSentOffers = (userId) => (dispatch) => {
     const mappedOffers = await Promise.all(
       offers.map((offer) => extractDataFromOffer(offer, "toUser"))
     );
-    debugger;
     dispatch({
       type: FETCH_OFFERS_SUCCESS,
       offers: mappedOffers,

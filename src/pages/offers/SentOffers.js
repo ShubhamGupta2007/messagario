@@ -8,6 +8,7 @@ import {
   collaborate,
 } from "actions/index.js";
 import { connect } from "react-redux";
+import { withToastManager } from "react-toast-notifications";
 
 class SentOffers extends React.Component {
   componentDidMount() {
@@ -17,12 +18,17 @@ class SentOffers extends React.Component {
   createCollaboration = (offer) => {
     const {
       auth: { user },
+      toastManager,
     } = this.props;
+
     const collaboration = newCollaboration({ offer, fromUser: user });
     const message = newMessage({ offer, fromUser: user });
 
-    collaborate(collaboration, message).then(() =>
-      alert("Collaboration created")
+    this.props.dispatch(collaborate({ collaboration, message })).then((_) =>
+      toastManager.add("Collaboration was Created!", {
+        appearance: "success",
+        autoDismiss: true,
+      })
     );
   };
   statusClass = (status) => {
@@ -64,17 +70,18 @@ class SentOffers extends React.Component {
                     <div>
                       <span className="label">Time:</span> {offer.time} hours
                     </div>
-                    {offer.status === "accepted" && (
-                      <div>
-                        <hr />
-                        <button
-                          onClick={() => this.createCollaboration(offer)}
-                          className="button is-success"
-                        >
-                          Collaborate
-                        </button>
-                      </div>
-                    )}
+                    {offer.status === "accepted" &&
+                      !offer.collaborationCreated && (
+                        <div>
+                          <hr />
+                          <button
+                            onClick={() => this.createCollaboration(offer)}
+                            className="button is-success"
+                          >
+                            Collaborate
+                          </button>
+                        </div>
+                      )}
                   </div>
                 </ServiceItem>
               </div>
@@ -86,5 +93,5 @@ class SentOffers extends React.Component {
   }
 }
 const mapStateToProps = ({ offers }) => ({ offers: offers.sent });
-
-export default withAuthorization(connect(mapStateToProps)(SentOffers));
+const SentOffersWithToast = withToastManager(SentOffers);
+export default withAuthorization(connect(mapStateToProps)(SentOffersWithToast));

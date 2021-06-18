@@ -10,22 +10,29 @@ import {
   onAuthStateChanged,
   storeAuthUser,
   resetAuthState,
+  subscribeToMessages,
 } from "actions/index.js";
 
 const store = initStore();
 
 class App extends React.Component {
   componentDidMount() {
-    this.unsubscribeAuth = onAuthStateChanged((authUser) => {
+    store.dispatch(resetAuthState());
+    this.unsubscribeAuth = onAuthStateChanged(async (authUser) => {
       // debugger;
-      store.dispatch(resetAuthState());
-      store.dispatch(storeAuthUser(authUser));
+      await store.dispatch(storeAuthUser(authUser));
+      if (authUser) {
+        this.unsubscribeMessages = store.dispatch(
+          subscribeToMessages(authUser.uid)
+        );
+      }
     });
   }
 
   componentWillUnmount() {
-    // debugger;
+    // // debugger;
     this.unsubscribeAuth();
+    this.unsubscribeMessages();
   }
 
   render() {

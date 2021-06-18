@@ -25,7 +25,7 @@ export const fetchServices = () =>
 
 export const fetchUserServices = async (userId) => {
   const userDbRef = await db.collection("profiles").doc(userId);
-  debugger;
+  // debugger;
   return db
     .collection("services")
     .where("user", "==", userDbRef)
