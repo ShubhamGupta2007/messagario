@@ -33,9 +33,9 @@ class ReceivedOffers extends React.Component {
               You don't have any received offers :(
             </span>
           )}
-          <div className="columns">
+          <div className="columns is-multiline">
             {offers.map((offer) => (
-              <div key={offer.id} className="column is-one-third">
+              <div key={offer.id} className="column is-one-third ">
                 <ServiceItem
                   noButton
                   className="offer-card"
