@@ -42,6 +42,11 @@ class SentOffers extends React.Component {
       <div className="container">
         <div className="content-wrapper">
           <h1 className="title">Sent Offers</h1>
+          {offers.length === 0 && (
+            <span className="tag is-warning is-large">
+              You don't have any sent offers :(
+            </span>
+          )}
           <div className="columns">
             {offers.map((offer) => (
               <div key={offer.id} className="column is-one-third">

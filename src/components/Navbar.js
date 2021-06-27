@@ -96,7 +96,7 @@ const Navbar = (props) => {
           </div>
 
           <div className="navbar-end">
-            {user && (
+            {user.uid && (
               <div className="navbar-item is-secondary user-welcome">
                 {`Hi ${user.fullName}`}
               </div>
@@ -104,9 +104,7 @@ const Navbar = (props) => {
             <Link to="/" className="navbar-item is-secondary">
               Home
             </Link>
-            <Link to="/services" className="navbar-item is-secondary">
-              Services
-            </Link>
+
             <Link to="/faq" className="navbar-item is-secondary">
               Faq
             </Link>
@@ -118,7 +116,7 @@ const Navbar = (props) => {
                     <Link to="/services/new" className="navbar-item">
                       Create Service
                     </Link>
-                    <Link to="/services/me" className="navbar-item">
+                    <Link to="/services/my" className="navbar-item">
                       Your Services
                     </Link>
                     <Link to="/offers/sent" className="navbar-item">
@@ -126,6 +124,9 @@ const Navbar = (props) => {
                     </Link>
                     <Link to="/offers/received" className="navbar-item">
                       Received Offers
+                    </Link>
+                    <Link to="/collaborations/me" className="navbar-item">
+                      Received Collaborations
                     </Link>
                   </div>
                 </div>

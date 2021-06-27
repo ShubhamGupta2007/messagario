@@ -3,6 +3,7 @@ import { FETCH_OFFERS_SUCCESS, CHANGE_OFFER_STATUS } from "types";
 import * as api from "api";
 
 export const createOffer = (offer) => api.createOffer(offer);
+
 const extractDataFromOffer = async (offer, userType) => {
   const service = await offer.service.get();
   const user = await offer[userType].get();

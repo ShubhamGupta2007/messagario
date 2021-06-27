@@ -8,11 +8,21 @@ import Spinner from "components/Spinner";
 import { logout } from "actions/index.js";
 
 class ServiceApp extends React.Component {
-  handleLogout = () => this.props.dispatch(logout());
+  handleLogout = (uid) => {
+    this.props.dispatch(logout(uid));
+  };
   renderApplication = (auth) => (
     <React.Fragment>
-      <Navbar handleLogout={this.handleLogout} auth={auth} loadFresh />
-      <Navbar auth={auth} handleLogout={this.handleLogout} id="navbar-clone" />
+      <Navbar
+        handleLogout={() => this.handleLogout(auth.user.uid)}
+        auth={auth}
+        loadFresh
+      />
+      <Navbar
+        auth={auth}
+        handleLogout={() => this.handleLogout(auth.user.uid)}
+        id="navbar-clone"
+      />
       <Sidebar />
       <Routes />
     </React.Fragment>
@@ -22,6 +32,7 @@ class ServiceApp extends React.Component {
     const { auth } = this.props;
 
     // return this.renderApplication(auth);
+
     return auth.isAuthResolved ? this.renderApplication(auth) : <Spinner />;
   }
 }

@@ -13,9 +13,14 @@ export const register = (registerFormData) => {
 export const login = (loginData) => {
   return api.login({ ...loginData });
 };
-export const logout = () => (dispatch) =>
-  api.logout().then((_) => dispatch({ user: null, type: SET_AUTH_USER }));
-
+export const logout = (uid) => (dispatch) =>
+  api
+    .logout()
+    .then((_) => {
+      const userStatusDatabaseRef = api.createFirebaseRef("status", uid);
+      return userStatusDatabaseRef.set(api.isOfflineForDatabase);
+    })
+    .then((_) => dispatch({ user: null, type: SET_AUTH_USER }));
 export const onAuthStateChanged = (onAuthCallback) =>
   api.onAuthStateChanged(onAuthCallback);
 

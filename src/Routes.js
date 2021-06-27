@@ -13,6 +13,8 @@ import UserServices from "components/service/UserServices";
 
 import ReceivedOffers from "./pages/offers/ReceivedOffers";
 import SentOffers from "pages/offers/SentOffers";
+import ReceivedCollaborations from "pages/collaborations/ReceivedCollaborations";
+import CollaborationDetail from "pages/collaborations/CollaborationDetail";
 
 function Routes() {
   return (
@@ -24,6 +26,18 @@ function Routes() {
 
       <Route exact path="/offers/received" component={ReceivedOffers} />
       <Route excat path="/offers/sent" component={SentOffers} />
+
+      <Route
+        excat
+        path="/collaborations/me"
+        component={ReceivedCollaborations}
+      />
+
+      <Route
+        excat
+        path="/collaborations/:collabId"
+        component={CollaborationDetail}
+      />
 
       <Route exact path="/services/:serviceId">
         <ServiceDetailPage />

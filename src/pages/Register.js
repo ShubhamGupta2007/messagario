@@ -10,9 +10,10 @@ import OnlyGuest from "HOC/OnlyGuest";
 const Register = (props) => {
   const [redirect, setRedirect] = useState(false);
   const { addToast } = useToasts();
-
+  const capitalize = (s) => s && s[0].toUpperCase() + s.slice(1);
   const registerUser = (userData) => {
     // props.history.push('/')
+    userData.fullName = capitalize(userData.fullName);
     register(userData).then(
       (_) => {
         addToast("Successfully Registered! Redirecting to home page", {
@@ -50,7 +51,7 @@ const Register = (props) => {
           <p className="has-text-grey">
             <a>Sign In With Google</a>&nbsp;
             <a href="/">Sign Up</a> &nbsp;·&nbsp;
-            <a href="../">Need Help?</a>
+            <a href="/">Need Help?</a>
           </p>
         </div>
       </div>

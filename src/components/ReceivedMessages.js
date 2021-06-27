@@ -20,7 +20,12 @@ const ReceivedMessages = ({ dispatch, messages }) => {
           <hr />
           <div className="navbar-item navbar-item-message">
             <div>{message.text}</div>
-            <Link onClick={() => {}} to={message.cta}>
+            <Link
+              onClick={() => {
+                markMessageAsRead(message);
+              }}
+              to={message.cta}
+            >
               <div className="button is-success">Join</div>
             </Link>
             <button

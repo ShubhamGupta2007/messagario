@@ -27,6 +27,7 @@ export const fetchServiceById = (serviceId) => (dispatch, getState) => {
   dispatch({ type: REQUEST_SERVICE });
   return api.fetchServiceById(serviceId).then(async (service) => {
     // service.user = await api.getUserProfile(service.user)
+    // debugger;
     const user = await service.user.get();
     service.user = user.data();
     service.user.id = user.id;

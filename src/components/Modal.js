@@ -1,10 +1,32 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 
 const Modal = (props) => {
   const [isActive, setIsActive] = useState(false);
 
-  const changeModalState = (modalState) => setIsActive(modalState);
+  const [willRedirect, setwillRedirect] = useState(false);
 
+  const { addToast } = useToasts();
+  const changeModalState = (modalState) => {
+    if (!props.auth.user.uid) {
+      addToast("To make an offer you should be logned In ", {
+        appearance: "error",
+        autoDismiss: true,
+        autoDismissTimeout: 3000,
+      });
+      setTimeout(() => {
+        setwillRedirect(true);
+      }, 3000);
+      return;
+    }
+    setIsActive(modalState);
+  };
+
+  if (willRedirect === true) {
+    return <Redirect to="/login" />;
+  }
   return (
     <div>
       <button
@@ -45,4 +67,7 @@ const Modal = (props) => {
   );
 };
 
-export default Modal;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps)(Modal);

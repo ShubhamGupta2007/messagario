@@ -30,7 +30,7 @@ const OfferModal = ({ service, auth }) => {
     offerCopy.toUser = createRef("profiles", service.user.id);
     offerCopy.service = createRef("services", service.id);
     offerCopy.time = parseInt(offer.time, 10);
-    debugger;
+
     createOffer(offerCopy).then(
       (_) => {
         closeModal();
